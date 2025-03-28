@@ -12,7 +12,7 @@ std:: vector<std:: string> getSymbols(std:: string transition){
     int len = transition.length();
     int x, y = 0;
 
-    for(int i = 0; i <= len/2; i++){
+    while(x + 2 <= len){
         
         
         symbol = transition.substr(x,2);
