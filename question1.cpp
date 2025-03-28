@@ -67,13 +67,10 @@ std::string encode(std:: map<std::string, std::string> encoding, std::string wor
 int main(){
 
     std::string table, word;
-
-    std:: cout << "Please enter the encoding table: ";
     std::getline(std::cin, table);
-    std:: cout << "Please enter the word to be encoded: ";
     std::getline(std::cin, word);
     std:: map<std::string, std:: string> encoding = map_to(table);
-    std:: cout<< "The encoded word is: " << encode(encoding, word) << std::endl;
+    std:: cout<< encode(encoding, word) << std::endl;
      
         return 0;
     
