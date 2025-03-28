@@ -13,9 +13,11 @@ int main(){
     
     std:: getline(std:: cin,table);
     std:: stringstream ss(table);
-    std:: string token;
+    std:: string token, key, value;
     
-    std:: vector<std::string> splitted;
+    std:: vector<std::string> splitted, pairs;
+    std:: map<std::string, std::string> encoding;
+    
 
 
 
@@ -27,10 +29,34 @@ int main(){
 
     for(std:: string word : splitted){
 
-        std:: cout << "Splitted: " << std:: endl;
+        std:: cout << "Splitted: " ;
         std:: cout << word << std:: endl; 
+    }
+    
+    for(std:: string pair : splitted){
+
+        std:: stringstream ss2(pair);
+        int i = 0;
+        while(std:: getline(ss2, token, '=')){
+
+            if(i == 0){
+                key = token;
+                i++;
+            }
+            else{
+                value = token;
+                i++;
+            }
+        }
+
+        std:: cout << "key: " << key << " value: " << value << std:: endl;
+        encoding[key] = value;
+        
+        }
+
+        
+        return 0;
+    
     }
 
 
-    return 0;
-}
