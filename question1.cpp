@@ -5,13 +5,8 @@
 #include<map>
 #include<vector>
 
-int main(){
+std:: map<std::string, std::string> map_to(std:: string table){
 
-
-    std:: string table;
-    std:: cout << "Enter the encoding table" << std::endl;
-    
-    std:: getline(std:: cin,table);
     std:: stringstream ss(table);
     std:: string token, key, value;
     
@@ -26,13 +21,7 @@ int main(){
         splitted.push_back(token);
 
     }
-
-    for(std:: string word : splitted){
-
-        std:: cout << "Splitted: " ;
-        std:: cout << word << std:: endl; 
-    }
-    
+  
     for(std:: string pair : splitted){
 
         std:: stringstream ss2(pair);
@@ -48,13 +37,44 @@ int main(){
                 i++;
             }
         }
-
-        std:: cout << "key: " << key << " value: " << value << std:: endl;
+        
         encoding[key] = value;
         
         }
 
-        
+    return encoding;
+
+};
+
+
+std::string encode(std:: map<std::string, std::string> encoding, std::string word){
+    
+    int len = word.length();
+    std::string encoded_word, alphabet, temp;
+
+    for(int i = 0; i < len; i++){
+        temp = word[i];
+        alphabet = encoding[temp];
+        encoded_word += alphabet;
+    }
+
+    return encoded_word;
+
+
+};
+
+
+int main(){
+
+    std::string table, word;
+
+    std:: cout << "Please enter the encoding table: ";
+    std::getline(std::cin, table);
+    std:: cout << "Please enter the word to be encoded: ";
+    std::getline(std::cin, word);
+    std:: map<std::string, std:: string> encoding = map_to(table);
+    std:: cout<< "The encoded word is: " << encode(encoding, word) << std::endl;
+     
         return 0;
     
     }
