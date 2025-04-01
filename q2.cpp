@@ -178,7 +178,8 @@ std:: string tape(std:: map<std:: string, std:: array<std::string,5>> mapping, s
 
 // initialize the variables
   std:: string state = "0";  int i = 1;
-  std:: string read, write, D, nex_state, output;  
+  std:: string read, write, D, nex_state, output;
+  int count = 0;  // to cap the number of iterations and avoid infinite loops  
 
   // getting the key for the first transition
   std:: string curr= state + encodedInput.at(i);
@@ -226,8 +227,17 @@ std:: string tape(std:: map<std:: string, std:: array<std::string,5>> mapping, s
     int len = encodedInput.size();
 
     //if the index is out of range, we are reading a blank space therefore read = "0"
-    if(i >= len || i < 0){
+    if(i >= len){
       read = "0";
+      encodedInput.push_back(write);
+      encodedInput.push_back("0");
+    }
+
+    else if(i < 0){
+      read = "0";
+      encodedInput.insert(encodedInput.begin(), write);
+      encodedInput.insert(encodedInput.begin(), "0");
+      //encodedInput.push_back("0");
     }
     else{
 
@@ -293,7 +303,16 @@ std:: string tape(std:: map<std:: string, std:: array<std::string,5>> mapping, s
     std:: cout << str << std:: endl;
        }
   std:: cout << "*****************"<<std:: endl; */
+
+  //checking if reached max iterations
+  if(count > 1000){
+    //std:: cout << "Error, too many iterations" << std:: endl;
+    return "Error";
   
+  }
+
+  count++; // increment the count
+
   }
   
   return output;
