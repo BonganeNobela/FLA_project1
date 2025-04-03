@@ -99,6 +99,15 @@ std:: map<std:: string, std:: array<std::string,5>> transitions_map (std:: vecto
     mapping[curr_trans] = transition;
   }
   
+  std::cout << "Mapping contents:" << std::endl;
+  for (const auto& pair : mapping) {
+      std::cout << "Key: " << pair.first << " -> Value: [";
+      for (const auto& element : pair.second) {
+          std::cout << element << " ";
+      }
+      std::cout << "]" << std::endl;
+  }
+
   return mapping;
 }
 
@@ -185,10 +194,8 @@ std:: string tape(std:: map<std:: string, std:: array<std::string,5>> mapping, s
   std:: string curr= state + encodedInput.at(i);
   
   // checking each key in the mapping
- /* std:: cout << "all transition keys: " << std:: endl;
-  for (const auto& pair : mapping) {
-        std::cout << pair.first << std::endl;  
-    } */
+  std:: cout << "all transitions: " << std:: endl;
+  
   
   // checking if the key exists in the mapping
    // std:: cout << "key: " << curr<< std::endl;
@@ -217,6 +224,7 @@ std:: string tape(std:: map<std:: string, std:: array<std::string,5>> mapping, s
     state = trans.at(0);
     nex_state = trans.at(2);
     write = trans.at(3);
+    D = trans.at(4);
     /*
     std:: cout <<"state: "  << state << std::endl;
     std:: cout <<"next state: "  << nex_state << std::endl;
@@ -230,11 +238,54 @@ std:: string tape(std:: map<std:: string, std:: array<std::string,5>> mapping, s
     if(i >= len){
       read = "0";
       encodedInput.push_back(write);
+      std:: cout << "encodedInput: " << std:: endl;
+      std:: cout << "[ " ;                                                                                //
+      for( std:: string str: encodedInput){                                                               //
+        std:: cout << str << " ";
+        }
+      std:: cout << "] " << std:: endl;                                                                                               
+      std:: cout << "transition: " << std:: endl;                                                             
+      for(std:: string str2 : trans){
+        std:: cout << str2 << " ";
+        }
+      std:: cout << std:: endl;
+      std:: cout << "at state: " << state << std:: endl;
+      std:: cout << "reading: " << read << std:: endl;
+      std:: cout << "writing: " << write << std:: endl;
+      std:: cout << "moving: " << D << std:: endl;
+      std:: cout << "next state: " << nex_state << std:: endl;
+      std:: cout << "i: " << i << std:: endl;
+      std:: cout << "count: " << count << std:: endl;
+      std:: cout << "*****************"<<std:: endl;                                                        //
+                                                                                                            //
+    //8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888  
       encodedInput.push_back("0");
+
     }
 
     else if(i < 0){
       read = "0";
+      std:: cout << "encodedInput: " << std:: endl;
+      std:: cout << "[ " ;                                                                                //
+      for( std:: string str: encodedInput){                                                               //
+        std:: cout << str << " ";
+        }
+      std:: cout << "] " << std:: endl;                                                                                               
+      std:: cout << "transition: " << std:: endl;                                                             
+      for(std:: string str2 : trans){
+        std:: cout << str2 << " ";
+        }
+      std:: cout << std:: endl;
+      std:: cout << "at state: " << state << std:: endl;
+      std:: cout << "reading: " << read << std:: endl;
+      std:: cout << "writing: " << write << std:: endl;
+      std:: cout << "moving: " << D << std:: endl;
+      std:: cout << "next state: " << nex_state << std:: endl;
+      std:: cout << "i: " << i << std:: endl;
+      std:: cout << "count: " << count << std:: endl;
+      std:: cout << "*****************"<<std:: endl;                                                        //
+                                                                                                            //
+    //8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888  
       encodedInput.insert(encodedInput.begin(), write);
       encodedInput.insert(encodedInput.begin(), "0");
       //encodedInput.push_back("0");
@@ -242,7 +293,28 @@ std:: string tape(std:: map<std:: string, std:: array<std::string,5>> mapping, s
     else{
 
       // if the index is in range, we are reading a character and changing it to the write symbol
-      read = encodedInput.at(i);  
+      read = encodedInput.at(i);
+      std:: cout << "encodedInput: " << std:: endl;
+      std:: cout << "[ " ;                                                                                //
+      for( std:: string str: encodedInput){                                                               //
+        std:: cout << str << " ";
+        }
+      std:: cout << "] " << std:: endl;                                                                                               
+      std:: cout << "transition: " << std:: endl;                                                             
+      for(std:: string str2 : trans){
+        std:: cout << str2 << " ";
+        }
+      std:: cout << std:: endl;
+      std:: cout << "at state: " << state << std:: endl;
+      std:: cout << "reading: " << read << std:: endl;
+      std:: cout << "writing: " << write << std:: endl;
+      std:: cout << "moving: " << D << std:: endl;
+      std:: cout << "next state: " << nex_state << std:: endl;
+      std:: cout << "i: " << i << std:: endl;
+      std:: cout << "count: " << count << std:: endl;
+      std:: cout << "*****************"<<std:: endl;                                                        //
+                                                                                                            //
+    //8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888    
       encodedInput.at(i) = write;
       /*
       std:: cout << "read: " << read << std:: endl;
@@ -252,7 +324,7 @@ std:: string tape(std:: map<std:: string, std:: array<std::string,5>> mapping, s
     
     //getting and printing out the direction
 
-    D = trans.at(4);
+    
     //std:: cout << "D(trans[4]) :" << D << std:: endl;
     
     // moving the index according to the direction
@@ -307,7 +379,7 @@ std:: string tape(std:: map<std:: string, std:: array<std::string,5>> mapping, s
   //checking if reached max iterations
   if(count > 1000){
     //std:: cout << "Error, too many iterations" << std:: endl;
-    return "Error";
+    return "Accept";
   
   }
 
